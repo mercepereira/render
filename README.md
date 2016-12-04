@@ -1,1 +1,2 @@
-Sample Render: creation nodeJS server with Express framework
+Sample render: creation nodeJS server with Express framework - "Hello John: random key"
+Sample weather: creation nodeJS server/client external API Accuweather - http://apidev.accuweather.com/developers/samples
