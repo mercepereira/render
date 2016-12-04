@@ -6,6 +6,8 @@ const exphbs = require('express-handlebars')
 const app = express()
 
 // view definitions
+// path Node-module to handle files and directory paths 
+// https://nodejs.org/dist/latest-v6.x/docs/api/path.html
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs',
