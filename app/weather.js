@@ -8,11 +8,12 @@ function searchLocation(request,response) {
 
     // API sample: http://developer.accuweather.com/accuweather-locations-api/apis/get/locations/v1/search
     rp({
+        method:'GET',
         uri: 'http://dataservice.accuweather.com/locations/v1/search',
         qs: {
-        //q: request.params.city,
-        apikey: 'd12VAWDxxsyLAEAs47vNkb4USak3gqmw',
-        q: 'barcelona'
+            apikey: 'd12VAWDxxsyLAEAs47vNkb4USak3gqmw',
+            q: request.params.city
+            //q: 'barcelona'
         },
         json: true
     })
