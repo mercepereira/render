@@ -1,34 +1,31 @@
 // app/weather.js
-const rp_weather = require('request-promise') // request-promise module: handle http request to external API using promise pattern; npm install request-promise --save  
+ const rp = require('request-promise') // request-promise module: handle http request to external API using promise pattern; // npm install request-promise --save ; npm install request --save 
+ 
 
-// End-point: "/<cityname>
 // "Search Weather location" request processing
-function init(app) {
-    app.get('/:city', (request, response) => {  
-        
-        // API sample: https://github.com/AccuWeather/AccuWeatherApiSamples/blob/master/currentconditions.html
-        const options = {  
-        method: 'GET',
-        uri: 'http://apidev.accuweather.com/locations/v1/search',
-        qs: {
-            q: request.params.city,
-            apiKey: 'cloudBurst'
-                // Use your accuweather API key here
-            },
-            json: true
-        }
+function searchLocation(request,response) {
+    console.log("city: " + request.params.city)  
 
-    ​   rp_weather(options)
-        .then((data) => {
-            response.render('weather', {
-                locationsearch: data
-                })
-        })
-        .catch ((err) => {
-            console.log(err)
-            response.render('error:' + err)
-        })
+    // API sample: http://developer.accuweather.com/accuweather-locations-api/apis/get/locations/v1/search
+    rp({
+        uri: 'http://dataservice.accuweather.com/locations/v1/search',
+        qs: {
+        //q: request.params.city,
+        apikey: 'd12VAWDxxsyLAEAs47vNkb4USak3gqmw',
+        q: 'barcelona'
+        },
+        json: true
     })
+        .then((data) => {
+            console.log(data)
+            response.json(data)
+            //response.render('index', data)
+        })
+        .catch((err) => {
+            console.log(err)
+            //response.render('error')
+            response.send(err)
+        })
 }
 
-module.exports.init = init 
+module.exports.searchLocation = searchLocation

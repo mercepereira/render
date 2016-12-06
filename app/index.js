@@ -3,8 +3,8 @@ const path = require('path')
 const express = require('express')
 const exphbs = require('express-handlebars')
 const home_service = require('./render')
-const rp = require('request-promise')   
-// npm install request --save
+const weather_service = require('./weather')   
+
 
 const app = express()
 
@@ -26,7 +26,7 @@ app.set('views',path.join(dir,'views'))
 
 // middleware pattern
 app.use((request, response, next) => {
-  console.log(request.headers)
+  //console.log(request.headers)
   next()
 })
 
@@ -43,25 +43,8 @@ app.use((err, request, response, next) => {
 
 
 //end-point "/<city name>"
-// weather_service.init(app)
 app.get('/:city', (request, response) => {  
-  rp({
-    uri: 'http://apidev.accuweather.com/locations/v1/search',
-    qs: {
-      q: request.params.city,
-      apiKey: 'cloudBurst'
-         // Use your accuweather API key here
-    },
-    json: true
-  })
-    .then((data) => {
-      response.render('index', data)
-    })
-    .catch((err) => {
-      console.log(err)
-      response.render('error')
-    })  
-    
+  weather_service.searchLocation(request,response)
 })
 
 // microserver waiting for request
