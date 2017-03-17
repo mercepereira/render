@@ -11,9 +11,8 @@ function searchLocation(request,response) {
         method:'GET',
         uri: 'http://dataservice.accuweather.com/locations/v1/search',
         qs: {
-            apikey: 'd12VAWDxxsyLAEAs47vNkb4USak3gqmw',
-            q: request.params.city
-            //q: 'barcelona'
+        q: request.params.city,
+        apikey: 'd12VAWDxxsyLAEAs47vNkb4USak3gqmw',
         },
         json: true
     })
